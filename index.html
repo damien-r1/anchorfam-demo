@@ -1,23 +1,164 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="robots" content="noindex, nofollow" />
-    <meta name="theme-color" content="#f6efe4" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-title" content="AnchorFam" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,400..700,100;1,9..144,400..700,100&family=Nunito:wght@400..800&family=Figtree:wght@400..800&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..600&display=swap" />
-    <link rel="manifest" href="./manifest.webmanifest" />
-    <link rel="icon" href="./icon.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="./icon.svg" />
-    <title>AnchorFam Prototype</title>
-    <script type="module" crossorigin src="./assets/index-CktioiqF.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-D9vBsWwd.css">
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0B1A2A">
+<title>Prototype Demos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,400&family=Nunito:wght@400;600;700;800&display=swap">
+<style>
+:root{
+  color-scheme:dark;
+  --ground:#0B1A2A; --deep:#050C15; --ink:#EEF3F7; --soft:rgba(238,243,247,.74); --faint:rgba(238,243,247,.56);
+  --line:rgba(255,255,255,.12); --card:rgba(255,255,255,.05); --card-hi:rgba(255,255,255,.08);
+  --aqua:#B5E4EE; --aqua-ink:#0B1A2A; --dawn:#F4C79B; --coral:#E9A58C;
+  --display:"Fraunces", Georgia, serif; --body:"Nunito", system-ui, -apple-system, sans-serif;
+}
+*{box-sizing:border-box}
+html{background:var(--deep)}
+body{margin:0;min-height:100vh;color:var(--ink);font:16px/1.5 var(--body);
+  background:radial-gradient(120% 70% at 50% -10%,#1C3A57 0%,var(--ground) 50%,var(--deep) 100%) fixed}
+a{color:inherit}
+a:focus-visible{outline:2px solid var(--aqua);outline-offset:3px;border-radius:12px}
+.wrap{max-width:1080px;margin:0 auto;padding:64px 24px 56px}
+header{max-width:620px;margin-bottom:40px}
+.eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:var(--faint);margin:0 0 14px}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(34px,6vw,52px);line-height:1.06;margin:0 0 16px;letter-spacing:-.01em;text-wrap:balance}
+.lede{color:var(--soft);font-size:17px;margin:0}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{display:flex;flex-direction:column;border-radius:26px;background:var(--card);border:1px solid var(--line);overflow:hidden;transition:background .2s,transform .2s}
+.card:hover{background:var(--card-hi);transform:translateY(-2px)}
+.art{height:150px;position:relative}
+.art svg{position:absolute;inset:0;width:100%;height:100%}
+.body{display:flex;flex-direction:column;gap:10px;padding:20px 22px 22px;flex:1}
+.tag{align-self:flex-start;font-size:11.5px;font-weight:800;letter-spacing:.04em;padding:3px 10px;border-radius:10px;background:rgba(255,255,255,.08);color:var(--soft)}
+h2{font-family:var(--display);font-weight:400;font-size:26px;line-height:1.15;margin:0}
+.body p{margin:0;color:var(--soft);font-size:15px}
+.what{margin:2px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--faint)}
+.what li{display:flex;gap:8px;align-items:baseline}
+.what li::before{content:"";flex:none;width:5px;height:5px;border-radius:50%;background:currentColor;transform:translateY(-2px)}
+.actions{margin-top:auto;padding-top:14px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;height:46px;padding:0 20px;border-radius:23px;background:var(--aqua);color:var(--aqua-ink);font-weight:800;text-decoration:none}
+.btn svg{width:16px;height:16px}
+.fresh{font-size:14px;font-weight:700;color:var(--soft);text-decoration:underline;text-decoration-color:rgba(255,255,255,.3);text-underline-offset:4px}
+.notes{margin-top:44px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px;color:var(--faint);font-size:14px}
+.notes b{display:block;color:var(--soft);font-size:14px;margin-bottom:2px}
+footer{margin-top:44px;padding-top:20px;border-top:1px solid var(--line);color:var(--faint);font-size:13px}
+@media (max-width:900px){.grid,.notes{grid-template-columns:1fr}.wrap{padding:40px 16px}.art{height:130px}}
+@media (prefers-reduced-motion:reduce){.card{transition:none}.card:hover{transform:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Prototype demos</p>
+    <h1>Three ways to stay close to your people</h1>
+    <p class="lede">Three clickable prototypes. Pick one, tap around, and tell me what feels right and what doesn't. They work best on a phone.</p>
+  </header>
+
+  <main class="grid">
+    <article class="card">
+      <div class="art" aria-hidden="true">
+        <svg viewBox="0 0 340 150" preserveAspectRatio="xMidYMid slice">
+          <defs><linearGradient id="a1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6E3CC"/><stop offset="1" stop-color="#E9C9A6"/></linearGradient>
+          <linearGradient id="a2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3E7A80"/><stop offset="1" stop-color="#22434B"/></linearGradient></defs>
+          <rect width="340" height="150" fill="url(#a1)"/>
+          <circle cx="250" cy="62" r="20" fill="#FFF4E2"/>
+          <path d="M0 92 Q 42 84 85 92 T 170 92 T 255 92 T 340 92 V150 H0Z" fill="url(#a2)"/>
+          <path d="M0 108 Q 42 101 85 108 T 170 108 T 255 108 T 340 108" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="2"/>
+          <g transform="translate(150 78)" fill="none" stroke="#FFFDF9" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="20" cy="4" r="4"/><path d="M20 8v24M10 14h20M6 24a14 14 0 0 0 28 0"/>
+          </g>
+        </svg>
+      </div>
+      <div class="body">
+        <span class="tag">The main app</span>
+        <h2>AnchorFam</h2>
+        <p>A friendship app that helps you notice who you're drifting from and makes reaching out easy.</p>
+        <ul class="what">
+          <li>Your people, with who to reach out to next</li>
+          <li>Groups, polls and plans, and local events</li>
+          <li>A private diary and Pip, a sea otter companion</li>
+        </ul>
+        <div class="actions">
+          <a class="btn" href="anchorfam/">Open demo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="fresh" href="anchorfam/?fresh">Start fresh</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="art" aria-hidden="true">
+        <svg viewBox="0 0 340 150" preserveAspectRatio="xMidYMid slice">
+          <defs><linearGradient id="b1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#26375E"/><stop offset=".65" stop-color="#B9828A"/><stop offset="1" stop-color="#F6C79B"/></linearGradient>
+          <radialGradient id="b2" cx="170" cy="100" r="120" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FFE1B0" stop-opacity=".7"/><stop offset="1" stop-color="#FFE1B0" stop-opacity="0"/></radialGradient></defs>
+          <rect width="340" height="150" fill="url(#b1)"/>
+          <rect width="340" height="150" fill="url(#b2)"/>
+          <circle cx="170" cy="102" r="22" fill="#FFE9C8"/>
+          <rect y="100" width="340" height="50" fill="#4F6585"/>
+          <path d="M0 112 Q 42 106 85 112 T 170 112 T 255 112 T 340 112 V150 H0Z" fill="#2C4466"/>
+          <path d="M150 106h40M140 120h60M158 132h24" stroke="#FFE1B0" stroke-opacity=".5" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="body">
+        <span class="tag">A calmer daily rhythm</span>
+        <h2>Mālie Hours</h2>
+        <p>An alarm and quiet-time app that opens your morning and evening, then steps out of the way.</p>
+        <ul class="what">
+          <li>A gentle sunrise alarm and morning ritual</li>
+          <li>Quiet windows that only let your people through</li>
+          <li>An evening wind-down with a short look back</li>
+        </ul>
+        <div class="actions">
+          <a class="btn" href="malie-hours/">Open demo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <span class="fresh" style="text-decoration:none;color:var(--faint);font-weight:600">Starts fresh every time</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="art" aria-hidden="true">
+        <svg viewBox="0 0 340 150" preserveAspectRatio="xMidYMid slice">
+          <defs><linearGradient id="c1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0B1430"/><stop offset=".6" stop-color="#3A3458"/><stop offset="1" stop-color="#B9787A"/></linearGradient></defs>
+          <rect width="340" height="150" fill="url(#c1)"/>
+          <g fill="#fff" opacity=".7"><circle cx="40" cy="24" r="1.2"/><circle cx="96" cy="40" r=".9"/><circle cx="210" cy="18" r="1.2"/><circle cx="300" cy="34" r="1"/><circle cx="262" cy="56" r=".8"/></g>
+          <path d="M0 86 Q 30 78 60 90 Q 80 98 100 104 L 100 150 H0Z" fill="#141F38"/>
+          <path d="M40 84 l2.5-34 h7 l2.5 34z" fill="#DCE3EA"/>
+          <rect x="41" y="62" width="10" height="4" fill="#F0A08E"/>
+          <rect x="41" y="42" width="10" height="8" fill="#283040"/>
+          <rect x="43" y="44" width="6" height="4" fill="#FFE9B0"/>
+          <path d="M46 46 L 330 26 L 330 66 Z" fill="#FFE9B0" opacity=".16"/>
+          <rect y="102" width="340" height="48" fill="#2E3253"/>
+          <path d="M100 114 Q 160 108 220 114 T 340 114 V150 H100Z" fill="#1B2140"/>
+        </svg>
+      </div>
+      <div class="body">
+        <span class="tag">Both together</span>
+        <h2>Harbor</h2>
+        <p>Mālie and AnchorFam in one app: the nudge to reach out lives inside your morning and evening, so there's no extra app to remember.</p>
+        <ul class="what">
+          <li>Morning ritual with a thank-you to someone</li>
+          <li>A tide chart of who you're close to and drifting from</li>
+          <li>Plans, groups and a journal in the same calm sea</li>
+        </ul>
+        <div class="actions">
+          <a class="btn" href="harbor/">Open demo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="fresh" href="harbor/?fresh">Start fresh</a>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <section class="notes" aria-label="About these demos">
+    <div><b>Your own copy</b>Taps and entries stay in your browser. Nobody else sees them, and nothing is sent anywhere.</div>
+    <div><b>Made-up people</b>Every name, message and plan is sample data.</div>
+    <div><b>Start over any time</b>Use "Start fresh" under a demo to reset it to the sample data.</div>
+  </section>
+
+  <footer>Early prototypes for feedback. Not real apps yet.</footer>
+</div>
+</body>
 </html>
